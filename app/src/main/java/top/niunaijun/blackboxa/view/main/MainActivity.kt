@@ -377,10 +377,25 @@ class MainActivity : LoadingActivity() {
                 try {
                     if (it.resultCode == RESULT_OK) {
                         it.data?.let { data ->
-                            val userId = data.getIntExtra("userID", 0)
+                            val sourceUserId = data.getIntExtra("userID", viewBinding.viewPager.currentItem)
                             val source = data.getStringExtra("source")
+                            val isInstalled = data.getBooleanExtra("isInstalled", false)
                             if (source != null) {
-                                fragmentList[userId].installApk(source)
+                                if (isInstalled) {
+                                    // App already installed in current user, install to a NEW user
+                                    val newUserIndex = fragmentList.size - 1 // last fragment is the "+" add-user slot
+                                    if (newUserIndex < fragmentList.size) {
+                                        fragmentList[newUserIndex].installApk(source)
+                                    } else {
+                                        // Fallback: install to current page's user
+                                        fragmentList[sourceUserId].installApk(source)
+                                    }
+                                } else {
+                                    // New app or APK file, install to the selected user
+                                    if (sourceUserId < fragmentList.size) {
+                                        fragmentList[sourceUserId].installApk(source)
+                                    }
+                                }
                             }
                         }
                     }

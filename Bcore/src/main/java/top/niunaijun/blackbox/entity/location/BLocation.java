@@ -97,6 +97,7 @@ public class BLocation implements Parcelable {
         location.setBearing(mBearing);
         location.setAccuracy(40f);
         location.setTime(System.currentTimeMillis());
+        location.setElapsedRealtimeNanos(System.nanoTime());
         Bundle extraBundle = new Bundle();
         
         int satelliteCount = 10;

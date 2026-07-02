@@ -49,19 +49,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         MethodParameterUtils.replaceFirstAppPkg(args);
-        
-        
-        String packageName = BActivityThread.getAppPackageName();
-        if (packageName != null && packageName.equals("com.google.android.gms")) {
-            
-            if (method.getName().equals("getLastLocation") || 
-                method.getName().equals("getLastKnownLocation") ||
-                method.getName().equals("requestLocationUpdates")) {
-                Log.w(TAG, "Blocking location request from Google Play Services to prevent crash");
-                return null;
-            }
-        }
-        
+
         return super.invoke(proxy, method, args);
     }
 
@@ -171,7 +159,7 @@ public class ILocationManagerProxy extends BinderInvocationStub {
                     BRProviderProperties.get(providerProperties)._set_mHasCellRequirement(false);
                 }
             }
-            return method.invoke(who, args);
+            return providerProperties;
         }
     }
 

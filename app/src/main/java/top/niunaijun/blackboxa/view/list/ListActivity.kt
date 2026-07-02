@@ -28,17 +28,19 @@ class ListActivity : BaseActivity() {
     private lateinit var viewModel: ListViewModel
 
     private var appList: List<InstalledAppBean> = ArrayList()
+    private var currentUserId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
+        currentUserId = intent.getIntExtra("userID", 0)
 
         initToolbar(viewBinding.toolbarLayout.toolbar, R.string.installed_app, true)
 
         mAdapter =
                 RVAdapter<InstalledAppBean>(this, ListAdapter())
                         .bind(viewBinding.recyclerView)
-                        .setItemClickListener { _, item, _ -> finishWithResult(item.packageName) }
+                        .setItemClickListener { _, item, _ -> finishWithResult(item.packageName, item.isInstall) }
 
         viewBinding.recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -106,11 +108,13 @@ class ListActivity : BaseActivity() {
 
     private val openDocumentedResult =
             registerForActivityResult(ActivityResultContracts.GetContent()) {
-                it?.run { finishWithResult(it.toString()) }
+                it?.run { finishWithResult(it.toString(), false) }
             }
 
-    private fun finishWithResult(source: String) {
+    private fun finishWithResult(source: String, isInstalled: Boolean) {
         intent.putExtra("source", source)
+        intent.putExtra("userID", currentUserId)
+        intent.putExtra("isInstalled", isInstalled)
         setResult(Activity.RESULT_OK, intent)
         val imm: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         window.peekDecorView()?.run { imm.hideSoftInputFromWindow(windowToken, 0) }
