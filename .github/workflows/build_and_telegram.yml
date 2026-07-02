@@ -1,6 +1,7 @@
-name: Build and Send APK to Telegram
+name: Build and Send APK to Telegram (DISABLED)
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
