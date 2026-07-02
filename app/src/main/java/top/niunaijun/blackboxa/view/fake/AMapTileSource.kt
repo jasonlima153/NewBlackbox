@@ -1,6 +1,5 @@
 package top.niunaijun.blackboxa.view.fake
 
-import org.osmdroid.tileprovider.MapTileProviderBasic
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase
 import org.osmdroid.tileprovider.tilesource.XYTileSource
 import org.osmdroid.util.MapTileIndex
@@ -24,10 +23,7 @@ object AMapTileSource {
         )
     ) {
         override fun getTileURLString(pMapTileIndex: Long): String {
-            return baseUrl + "x=" + MapTileIndex.getX(pMapTileIndex)
-                    + "&y=" + MapTileIndex.getY(pMapTileIndex)
-                    + "&z=" + MapTileIndex.getZoom(pMapTileIndex)
-                    + "&lang=zh_cn&size=1&scl=1&style=7&ltype=7"
+            return "${baseUrl}x=${MapTileIndex.getX(pMapTileIndex)}&y=${MapTileIndex.getY(pMapTileIndex)}&z=${MapTileIndex.getZoom(pMapTileIndex)}&lang=zh_cn&size=1&scl=1&style=7&ltype=7"
         }
     }
 
@@ -44,10 +40,7 @@ object AMapTileSource {
         )
     ) {
         override fun getTileURLString(pMapTileIndex: Long): String {
-            return baseUrl + "x=" + MapTileIndex.getX(pMapTileIndex)
-                    + "&y=" + MapTileIndex.getY(pMapTileIndex)
-                    + "&z=" + MapTileIndex.getZoom(pMapTileIndex)
-                    + "&lang=zh_cn&size=1&scl=1&style=6&ltype=6"
+            return "${baseUrl}x=${MapTileIndex.getX(pMapTileIndex)}&y=${MapTileIndex.getY(pMapTileIndex)}&z=${MapTileIndex.getZoom(pMapTileIndex)}&lang=zh_cn&size=1&scl=1&style=6&ltype=6"
         }
     }
 }
