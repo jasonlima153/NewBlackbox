@@ -1,4 +1,4 @@
-name: Build Multi-App Cloner APK
+name: Build 多开分身 APK
 
 on:
   push:
@@ -31,37 +31,12 @@ jobs:
     - name: Grant execute permission
       run: chmod +x ./gradlew
 
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
-
-    - name: Upload Debug APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: BlackBox-Debug
-        path: app/build/outputs/apk/debug/*.apk
-        retention-days: 7
-
     - name: Build Release APK
       run: ./gradlew assembleRelease
 
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
       with:
-        name: BlackBox-Release
+        name: 多开分身
         path: app/build/outputs/apk/release/*.apk
         retention-days: 7
-
-    - name: Build Summary
-      run: |
-        echo "## 📦 多开器构建完成" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "| 产物 | 说明 |" >> $GITHUB_STEP_SUMMARY
-        echo "|---|---|" >> $GITHUB_STEP_SUMMARY
-        echo "| **BlackBox-Debug** | 调试版，可直接安装 |" >> $GITHUB_STEP_SUMMARY
-        echo "| **BlackBox-Release** | 正式版，可直接安装 |" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 使用方法" >> $GITHUB_STEP_SUMMARY
-        echo "1. 下载并安装 APK 到手机" >> $GITHUB_STEP_SUMMARY
-        echo "2. 打开 BlackBox，点击 + 添加已安装的闲鱼" >> $GITHUB_STEP_SUMMARY
-        echo "3. 在 BlackBox 内启动克隆的闲鱼" >> $GITHUB_STEP_SUMMARY
-        echo "4. 可长按创建桌面快捷方式" >> $GITHUB_STEP_SUMMARY

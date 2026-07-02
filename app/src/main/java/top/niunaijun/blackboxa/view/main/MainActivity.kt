@@ -403,19 +403,19 @@ class MainActivity : LoadingActivity() {
         try {
             when (item.itemId) {
                 R.id.main_git -> {
-                    val intent =
-                            Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("https://github.com/ALEX5402/NewBlackbox")
-                            )
-                    startActivity(intent)
+                    val clipboard = getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                    val clip = android.content.ClipData.newPlainText("WeChat", "zzr5202")
+                    clipboard.setPrimaryClip(clip)
+                    android.widget.Toast.makeText(this, "作者微信已复制到剪贴板: zzr5202", android.widget.Toast.LENGTH_LONG).show()
                 }
                 R.id.main_setting -> {
                     SettingActivity.start(this)
                 }
                 R.id.main_tg -> {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/newblackboxa"))
-                    startActivity(intent)
+                    val clipboard = getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                    val clip = android.content.ClipData.newPlainText("WeChat", "zzr5202")
+                    clipboard.setPrimaryClip(clip)
+                    android.widget.Toast.makeText(this, "作者微信已复制到剪贴板: zzr5202", android.widget.Toast.LENGTH_LONG).show()
                 }
                 R.id.fake_location -> {
                     
