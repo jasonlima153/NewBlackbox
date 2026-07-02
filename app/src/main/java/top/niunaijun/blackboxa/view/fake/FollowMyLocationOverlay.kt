@@ -80,7 +80,7 @@ class FollowMyLocationOverlay : AppCompatActivity() {
         mapController.setZoom(12.5)
 
         mapController.setCenter(startPoint)
-        binding.map.setTileSource(TileSourceFactory.MAPNIK)
+        binding.map.setTileSource(AMapTileSource.VECTOR)
     }
 
     override fun onBackPressed() {
