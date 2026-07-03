@@ -156,6 +156,7 @@ static bool is_safe_path(const char* path) {
     if (!path) return false;
     if (strstr(path, "/proc/net/")) return true;
     if (strstr(path, "/dev/socket/")) return true;
+    if (strstr(path, "/dev/input/")) return true;
     return false;
 }
 

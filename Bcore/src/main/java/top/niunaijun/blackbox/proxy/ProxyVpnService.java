@@ -133,8 +133,8 @@ public class ProxyVpnService extends VpnService {
             builder.addRoute("0.0.0.0", 0);  
             
             
-            builder.addDnsServer("8.8.8.8");
-            builder.addDnsServer("8.8.4.4");
+            builder.addDnsServer("114.114.114.114");
+            builder.addDnsServer("114.114.114.115");
             
             
             builder.addAllowedApplication(getPackageName());

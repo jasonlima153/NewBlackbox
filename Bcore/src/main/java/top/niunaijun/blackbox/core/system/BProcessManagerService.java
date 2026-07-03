@@ -296,7 +296,7 @@ public class BProcessManagerService implements ISystemService {
             }
         }
         if (processName == null) {
-            throw new RuntimeException("processName = null");
+            return null;
         }
         return processName;
     }

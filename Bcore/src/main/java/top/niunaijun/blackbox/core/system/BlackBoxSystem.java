@@ -64,7 +64,11 @@ public class BlackBoxSystem {
         mServices.add(BNotificationManagerService.get());
 
         for (ISystemService service : mServices) {
-            service.systemReady();
+            try {
+                service.systemReady();
+            } catch (Throwable e) {
+                Log.e("BlackBoxSystem", "Error starting service: " + service.getClass().getSimpleName(), e);
+            }
         }
 
         List<String> preInstallPackages = AppSystemEnv.getPreInstallPackages();
